@@ -16,13 +16,23 @@ export interface NotesResponse {
   totalPages: number;
 }
 
-type GetNotesParams = {
+export type GetNotesParams = {
   search?: string;
   page?: number;
   perPage?: number;
+  categoryId?: string;
+};
+
+export type CategoryType = {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export const getNotes = async ({
+  categoryId,
   search,
   page = 1,
   perPage = 12,
@@ -32,9 +42,15 @@ export const getNotes = async ({
     perPage,
   };
 
+  if (categoryId) {
+    params.categoryId = categoryId;
+  }
+
   if (search?.trim()) {
     params.search = search.trim();
   }
+
+  console.log("Sending params:", params);
 
   const response = await axiosInstance.get<NotesResponse>("/notes", {
     params,
@@ -56,4 +72,9 @@ export const deleteNote = async (noteId: string): Promise<Note> => {
 export const fetchNoteById = async (id: string): Promise<Note> => {
   const response = await axiosInstance.get<Note>(`/notes/${id}`);
   return response.data;
+};
+
+export const getCategories = async () => {
+  const { data } = await axios.get<CategoryType[]>(`/categories`);
+  return data;
 };
