@@ -50,8 +50,6 @@ export const getNotes = async ({
     params.search = search.trim();
   }
 
-  console.log("Sending params:", params);
-
   const response = await axiosInstance.get<NotesResponse>("/notes", {
     params,
   });
