@@ -1,4 +1,3 @@
-import Link from "next/link";
 import css from "./SearchBox.module.css";
 
 interface SearchBoxProps {
