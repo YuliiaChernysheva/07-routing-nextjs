@@ -23,11 +23,9 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
   preview,
-}: // sidebar,
-Readonly<{
+}: Readonly<{
   children: React.ReactNode;
   preview: React.ReactNode;
-  // sidebar: React.ReactNode;
 }>) {
   return (
     <html lang="en">
