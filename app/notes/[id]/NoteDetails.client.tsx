@@ -16,6 +16,7 @@ const NoteDetailsClient = () => {
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
     refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {
