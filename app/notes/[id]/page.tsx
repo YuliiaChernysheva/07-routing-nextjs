@@ -12,7 +12,6 @@ type Props = {
 
 const NoteDetails = async ({ params }: Props) => {
   const { id } = await params;
-
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({

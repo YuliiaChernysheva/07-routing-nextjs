@@ -4,7 +4,7 @@ import { useState } from "react";
 import css from "./page.module.css";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
-import { getNotes, NotesResponse } from "@/lib/api";
+import { fetchNotes, NotesResponse } from "@/lib/api";
 
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
@@ -14,13 +14,10 @@ import Modal from "@/components/Modal/Modal";
 
 interface NotesClientProps {
   initialData: NotesResponse;
-  categoryId: string;
+  initialTag: string;
 }
 
-export default function NotesClient({
-  initialData,
-  categoryId,
-}: NotesClientProps) {
+export default function NotesClient({ initialTag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -37,15 +34,13 @@ export default function NotesClient({
   };
 
   const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["notes", page, debouncedSearch, categoryId],
+    queryKey: ["notes", page, debouncedSearch, initialTag],
     queryFn: () =>
-      getNotes({
-        page,
-        perPage: 12,
+      fetchNotes({
         search: debouncedSearch,
-        ...(categoryId !== "All" && { categoryId }),
+        page,
+        tag: initialTag !== "All" ? initialTag : undefined,
       }),
-    initialData,
     placeholderData: keepPreviousData,
   });
 

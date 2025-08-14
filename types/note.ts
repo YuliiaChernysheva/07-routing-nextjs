@@ -13,10 +13,3 @@ export interface NewNoteData {
   content: string;
   tag: Tag;
 }
-
-export interface NoteUpdateData {
-  id: string;
-  title?: string;
-  content?: string;
-  tag?: Tag;
-}

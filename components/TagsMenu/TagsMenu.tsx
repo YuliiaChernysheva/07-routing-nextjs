@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import css from "./TagsMenu.module.css";
 
-const categories = ["All", "Work", "Personal", "Meeting", "Shopping", "Todo"];
+const tags = ["All", "Work", "Personal", "Meeting", "Shopping", "Todo"];
 
 const TagsMenu = () => {
   const menuRef = useRef<HTMLUListElement>(null);
@@ -19,14 +19,14 @@ const TagsMenu = () => {
     <div className={css.menuContainer}>
       <button className={css.menuButton}>Notes ▾</button>
       <ul ref={menuRef} className={css.menuList}>
-        {categories.map((category) => (
-          <li key={category} className={css.menuItem}>
+        {tags.map((tag) => (
+          <li key={tag} className={css.menuItem}>
             <Link
-              href={`/notes/filter/${category}`}
+              href={`/notes/filter/${tag}`}
               className={css.menuLink}
               onClick={handleLinkClick}
             >
-              {category}
+              {tag}
             </Link>
           </li>
         ))}

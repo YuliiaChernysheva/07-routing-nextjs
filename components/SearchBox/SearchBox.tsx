@@ -7,18 +7,13 @@ interface SearchBoxProps {
   categoryId?: string;
 }
 
-export default function SearchBox({
-  value,
-  onSearch,
-  categoryId,
-}: SearchBoxProps) {
+export default function SearchBox({ value, onSearch }: SearchBoxProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSearch(event.target.value);
   };
 
   return (
     <div>
-      {" "}
       <input
         className={css.input}
         value={value}
@@ -26,7 +21,6 @@ export default function SearchBox({
         type="text"
         placeholder="Search notes"
       />
-      <Link href={`/notes/filter/${categoryId}/${value}`}>Search</Link>
     </div>
   );
 }

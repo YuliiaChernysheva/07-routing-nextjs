@@ -3,14 +3,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchNoteById } from "@/lib/api";
 import css from "./NoteDetails.module.css";
-// import { useState } from "react";
 import { useParams } from "next/navigation";
 
 const NoteDetailsClient = () => {
   const { id } = useParams<{ id: string }>();
-  // const router = useRouter();
-
-  // const parsedId = Number(id);
 
   const {
     data: note,
@@ -21,16 +17,6 @@ const NoteDetailsClient = () => {
     queryFn: () => fetchNoteById(id),
     refetchOnMount: false,
   });
-
-  // const handleClickBack = () => {
-  //   router.back();
-  // };
-
-  // const [isEdit, setIsEdit] = useState(false);
-
-  // const handleEdit = () => {
-  //   setIsEdit(true);
-  // };
 
   if (isLoading) {
     return <p>Loading, please wait...</p>;

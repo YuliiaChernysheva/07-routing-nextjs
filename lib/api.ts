@@ -16,38 +16,39 @@ export interface NotesResponse {
   totalPages: number;
 }
 
-export type GetNotesParams = {
+export type FetchNotesParams = {
   search?: string;
   page?: number;
   perPage?: number;
-  categoryId?: string;
+  tag?: string;
 };
 
-export type CategoryType = {
-  id: string;
-  name: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-};
+// export type CategoryType = {
+//   id: string;
+//   name: string;
+//   description: string;
+//   createdAt: string;
+//   updatedAt: string;
+// };
 
-export const getNotes = async ({
-  categoryId,
-  search,
+export const fetchNotes = async ({
   page = 1,
   perPage = 12,
-}: GetNotesParams): Promise<NotesResponse> => {
-  const params: Record<string, string | number> = {
+  search = "",
+  tag,
+}: FetchNotesParams): Promise<NotesResponse> => {
+  const params: FetchNotesParams = {
     page,
     perPage,
+    tag,
   };
 
-  if (categoryId) {
-    params.categoryId = categoryId;
-  }
+  // if (tag) {
+  //   params.categoryId = tag;
+  // }
 
-  if (search?.trim()) {
-    params.search = search.trim();
+  if (search) {
+    params.search = search;
   }
 
   const response = await axiosInstance.get<NotesResponse>("/notes", {
@@ -72,7 +73,7 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
   return response.data;
 };
 
-export const getCategories = async () => {
-  const { data } = await axios.get<CategoryType[]>(`/categories`);
-  return data;
-};
+// export const getCategories = async () => {
+//   const { data } = await axios.get<CategoryType[]>(`/categories`);
+//   return data;
+// };
