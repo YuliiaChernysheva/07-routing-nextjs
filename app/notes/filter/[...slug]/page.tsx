@@ -15,5 +15,5 @@ export default async function NotesByFilter({ params }: Props) {
     ...(tag && tag !== "All" && { tag }),
   });
 
-  return <NotesClient initialData={data} initialTag={tag} />;
+  return <NotesClient initialData={data} tag={tag} />;
 }
