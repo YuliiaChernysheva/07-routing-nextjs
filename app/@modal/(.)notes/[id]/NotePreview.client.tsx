@@ -6,8 +6,11 @@ import { useParams, useRouter } from "next/navigation";
 import { fetchNoteById } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 
-export default function PostPreviewClient() {
-  const { id } = useParams<{ id: string }>();
+type NotePreviewProps = {
+  id: string;
+};
+
+export default function NotePreview({ id }: NotePreviewProps) {
   const router = useRouter();
 
   const {
@@ -48,7 +51,7 @@ export default function PostPreviewClient() {
           <p className={css.content}>{note?.content}</p>
 
           <p className={css.date}>
-            Created: {new Date(note?.createdAt).toLocaleDateString()}
+            Created: {new Date(note.createdAt).toLocaleDateString()}
           </p>
         </div>
       </div>

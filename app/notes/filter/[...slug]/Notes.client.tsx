@@ -14,10 +14,10 @@ import Modal from "@/components/Modal/Modal";
 
 interface NotesClientProps {
   initialData: NotesResponse;
-  initialTag: string;
+  tag: string;
 }
 
-export default function NotesClient({ initialTag }: NotesClientProps) {
+export default function NotesClient({ tag, initialData }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -34,14 +34,15 @@ export default function NotesClient({ initialTag }: NotesClientProps) {
   };
 
   const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["notes", page, debouncedSearch, initialTag],
+    queryKey: ["notes", page, debouncedSearch, tag],
     queryFn: () =>
       fetchNotes({
         search: debouncedSearch,
         page,
-        tag: initialTag !== "All" ? initialTag : undefined,
+        tag: tag !== "All" ? tag : undefined,
       }),
     placeholderData: keepPreviousData,
+    initialData,
   });
 
   return (
