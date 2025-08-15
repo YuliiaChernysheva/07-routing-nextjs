@@ -26,7 +26,7 @@
 //   );
 // }
 
-import NotePreview from "./NotePreview";
+import NotePreview from "./NotePreview.client";
 
 export default function NoteDetailsModal() {
   return <NotePreview />;
